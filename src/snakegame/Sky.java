@@ -29,18 +29,40 @@ class Sky extends Environment {
     public void initializeEnvironment() {
     }
 
+    int counter;
+    
     @Override
     public void timerTaskHandler() {
+//        System.out.println("Hey dude..." + ++counter);
     }
 
     @Override
     public void keyPressedHandler(KeyEvent e) {
+//        System.out.println("Key Event" + e.getKeyChar());
+//        System.out.println("Key Event" + e.getKeyCode());
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            System.out.println("Go Left!");
+        } else if (e.getKeyCode()== KeyEvent.VK_RIGHT){
+            System.out.println("Go Right!");
+        } else if (e.getKeyCode()== KeyEvent.VK_UP) {
+            System.out.println("Go Up!");
+        } else if (e.getKeyCode()== KeyEvent.VK_DOWN) {
+            System.out.println("Go Down!");
+    }
     }
 
     @Override
     public void keyReleasedHandler(KeyEvent e) {
+        if (e.getKeyCode()== KeyEvent.VK_W){
+            System.out.println("Go Left!");
+        } else if (e.getKeyCode()== KeyEvent.VK_A) {
+            System.out.println("Go Right!");
+        } else if (e.getKeyCode()== KeyEvent.VK_S) {
+            System.out.println("Go UP!");
+    } else if (e.getKeyCode()== KeyEvent.VK_D) {
+            System.out.println("Go Down!");
+        }
     }
-
     @Override
     public void environmentMouseClicked(MouseEvent e) {
         System.out.println("mouse clicked at " + e.getPoint());
@@ -54,5 +76,7 @@ class Sky extends Environment {
             grid.paintComponent(graphics);
         }
     }
-    
+       
 }
+ 
+    
