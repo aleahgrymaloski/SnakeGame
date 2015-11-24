@@ -5,19 +5,11 @@
  */
 package snakegame;
 
-import environment.ApplicationStarter;
-
 /**
  *
  * @author Aleah
  */
-public class SnakeGame {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        ApplicationStarter.run("Snake Run", new Sky());
-    }
+public enum Direction {
+    LEFT, RIGHT, UP, DOWN
     
 }
