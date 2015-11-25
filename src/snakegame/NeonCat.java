@@ -18,9 +18,10 @@ import static javafx.scene.paint.Color.color;
  */
 public class NeonCat {
 
-    public NeonCat(Direction direction, Grid grid) {
+    public NeonCat(Direction direction, Grid grid, MoveValidatorIntf validator) {
         this.direction = direction;
         this.grid = grid;
+        this.validator = validator;
 
         //create the snake body
         body = new ArrayList<>();
@@ -36,6 +37,8 @@ public class NeonCat {
     private ArrayList<Point> body;
     private Grid grid;
     private Color bodyColor = Color.MAGENTA;
+    private final MoveValidatorIntf validator;
+
 
     public void draw(Graphics graphics) {
         for (int i = 0; i < getBody().size(); i++) {
@@ -63,7 +66,7 @@ public class NeonCat {
         }
     
         //add new head
-        getBody().add(0, newHead);
+        body.add(HEAD_POSITION, validator.validateMove(newHead));
       
         //delete tail
         getBody().remove(getBody().size() - 1);
@@ -71,10 +74,12 @@ public class NeonCat {
     }
 
     public Point getHead() {
-        return getBody().get(0);
+        return getBody().get(HEAD_POSITION);
 
     }
 
+  private static final int HEAD_POSITION = 0;
+    
     /**
      * @return the direction
      */
