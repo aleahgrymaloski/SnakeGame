@@ -5,6 +5,7 @@
         <group>
             <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/SnakeGame.java</file>
             <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/Sky.java</file>
+            <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/MoveValidatorIntf.java</file>
             <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/NeonCat.java</file>
             <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/Direction.java</file>
         </group>

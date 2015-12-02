@@ -14,6 +14,7 @@ import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -22,15 +23,18 @@ import java.awt.event.MouseEvent;
 class Sky extends Environment implements MoveValidatorIntf {
 
     private Grid grid;
-    private NeonCat cat;
-
+    public NyanCat cat;
+    Image background;
+    
     public Sky() {
-        grid = new Grid(25, 20, 20, 20, new Point(10, 50), Color.pink);
-        cat = new NeonCat(Direction.LEFT, grid, this);
+        grid = new Grid(25, 17, 32, 32, new Point(10, 10), Color.pink);
+        cat = new NyanCat(Direction.LEFT, grid, this);
 
-//         this.setBackground("sky background.png");
-//        Image NyanCat = ResourceTools.loadImageFromResource("tumblr_mjphnqLpNyls5jjtzol_400.gif");
-//        cat = ResourceTools.loadImageFromResource("sky background.png");
+        BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("snakegame/nyan_cat_background.jpg");
+
+        this.setBackground(temp.getScaledInstance(1000, 600, Image.SCALE_SMOOTH));
+        
+        
     }
 
     @Override
@@ -119,12 +123,11 @@ class Sky extends Environment implements MoveValidatorIntf {
     @Override
     public Point validateMove(Point proposedLocation) {
         if (proposedLocation.x < 0) {
-            
-            if (proposedLocation.y > grid.getRows() /2) {
+
+            if (proposedLocation.y > grid.getRows() / 2) {
                 proposedLocation.x++;
                 proposedLocation.y--;
 
-                
             }
 
             System.out.println("OUT OF BOUNDS!!!");

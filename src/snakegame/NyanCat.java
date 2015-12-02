@@ -6,6 +6,7 @@
 package snakegame;
 
 import grid.Grid;
+import images.ResourceTools;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -16,9 +17,9 @@ import static javafx.scene.paint.Color.color;
  *
  * @author Aleah
  */
-public class NeonCat {
+public class NyanCat {
 
-    public NeonCat(Direction direction, Grid grid, MoveValidatorIntf validator) {
+    public NyanCat(Direction direction, Grid grid, MoveValidatorIntf validator) {
         this.direction = direction;
         this.grid = grid;
         this.validator = validator;
@@ -47,6 +48,25 @@ public class NeonCat {
                     getGrid().getCellSystemCoordinate(getBody().get(i)).y,
                     getGrid().getCellWidth(),
                     getGrid().getCellHeight());
+            int dots;
+            
+           
+            
+             for (int z = 0; z < dots; z++) {
+                if (z == 0) {
+                    graphics.drawImage(head, x[z], y[z], this);
+                } else {
+                    graphics.drawImage(ball, x[z], y[z], this);
+                }
+//            
+                
+//                if (i =/null) graphics.setColor(java.awt.Color.pink);
+//            else if (i/= null ) graphics.setColor(java.awt.Color.yellow);
+   
+
+       
+                
+            
 
         }
     }
@@ -54,6 +74,8 @@ public class NeonCat {
     public void move() {
         //make a copy of the current head location
         Point newHead = new Point(getHead());
+        
+        
 
         if (getDirection() == Direction.LEFT) {
             newHead.x--;
@@ -65,8 +87,14 @@ public class NeonCat {
             newHead.y++;
         }
     
+
         //add new head
         body.add(HEAD_POSITION, validator.validateMove(newHead));
+        
+        
+        this.getHead(image = ResourceTools.loadImageFromResource("nyancat_catgif.gif"));
+     
+   
       
         //delete tail
         getBody().remove(getBody().size() - 1);
