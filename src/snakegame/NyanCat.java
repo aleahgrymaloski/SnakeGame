@@ -8,6 +8,7 @@ package snakegame;
 import grid.Grid;
 import images.ResourceTools;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
@@ -24,6 +25,8 @@ public class NyanCat {
         this.grid = grid;
         this.validator = validator;
 
+        this.nyanCat = ResourceTools.loadImageFromResource("snakegame/nyan_cat.png");
+
         //create the snake body
         body = new ArrayList<>();
         body.add(new Point(5, 5));
@@ -39,43 +42,45 @@ public class NyanCat {
     private Grid grid;
     private Color bodyColor = Color.MAGENTA;
     private final MoveValidatorIntf validator;
-
+    private Image nyanCat;
 
     public void draw(Graphics graphics) {
         for (int i = 0; i < getBody().size(); i++) {
 //            System.out.println("body location = " + body.get(i).toString());
-            graphics.fillOval(getGrid().getCellSystemCoordinate(getBody().get(i)).x,
-                    getGrid().getCellSystemCoordinate(getBody().get(i)).y,
-                    getGrid().getCellWidth(),
-                    getGrid().getCellHeight());
-            int dots;
-            
-           
-            
-             for (int z = 0; z < dots; z++) {
-                if (z == 0) {
-                    graphics.drawImage(head, x[z], y[z], this);
-                } else {
-                    graphics.drawImage(ball, x[z], y[z], this);
-                }
+
+            if (i == HEAD_POSITION) {
+                graphics.drawImage(nyanCat, getGrid().getCellSystemCoordinate(getBody().get(i)).x,
+                        getGrid().getCellSystemCoordinate(getBody().get(i)).y,
+                        getGrid().getCellWidth(),
+                        getGrid().getCellHeight(), null);
+            } else {
+                graphics.fillOval(getGrid().getCellSystemCoordinate(getBody().get(i)).x,
+                        getGrid().getCellSystemCoordinate(getBody().get(i)).y,
+                        getGrid().getCellWidth(),
+                        getGrid().getCellHeight());
+
+            }
+
+//            if i/null = head(graphics.setColor(Color.blue)){
+//           
+//            else if graphics.setColor(Color.green)
 //            
-                
+//        }
+//             for (int z = 0; z < dots; z++) {
+//                if (z == 0) {
+//                    graphics.drawImage(head, x[z], y[z], this);
+//                } else {
+//                    graphics.drawImage(ball, x[z], y[z], this);
+//                }
+//            
 //                if (i =/null) graphics.setColor(java.awt.Color.pink);
 //            else if (i/= null ) graphics.setColor(java.awt.Color.yellow);
-   
-
-       
-                
-            
-
         }
     }
 
     public void move() {
         //make a copy of the current head location
         Point newHead = new Point(getHead());
-        
-        
 
         if (getDirection() == Direction.LEFT) {
             newHead.x--;
@@ -86,16 +91,11 @@ public class NyanCat {
         } else if (getDirection() == Direction.DOWN) {
             newHead.y++;
         }
-    
 
         //add new head
         body.add(HEAD_POSITION, validator.validateMove(newHead));
-        
-        
-        this.getHead(image = ResourceTools.loadImageFromResource("nyancat_catgif.gif"));
-     
-   
-      
+
+//        this.getHead(image = ResourceTools.loadImageFromResource("nyancat_catgif.gif"));
         //delete tail
         getBody().remove(getBody().size() - 1);
 
@@ -106,8 +106,8 @@ public class NyanCat {
 
     }
 
-  private static final int HEAD_POSITION = 0;
-    
+    private static final int HEAD_POSITION = 0;
+
     /**
      * @return the direction
      */
