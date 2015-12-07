@@ -72,10 +72,26 @@ class Sky extends Environment implements MoveValidatorIntf {
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
             cat.setDirection(Direction.UP);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+       
+//        } else if (e.getKeyCode() == KeyEvent.VK_1) {
+//           this.limit = LIMIT_SLOW;
+//        
+//        } else if (e.getKeyCode() == KeyEvent.VK_2) {
+//            this.limit = LIMIT_MEDIUM;
+//       
+//         } else if (e.getKeyCode() == KeyEvent.VK_3) {
+//            this.limit = LIMIT_FAST;
+//       
+//         } else if (e.getKeyCode() == KeyEvent.VK_4) {
+//            this.limit = LIMIT_CRAZY;
+//        }
+//    
+       
 //            System.out.println("Key Event" + e.getKeyChar());
 //            System.out.println("Key Event" + e.getKeyCode());
 //            System.out.println("DOWN!!!");
             cat.setDirection(Direction.DOWN);
+            
         }
     }
 

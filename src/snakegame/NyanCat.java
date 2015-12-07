@@ -26,7 +26,7 @@ public class NyanCat {
         this.validator = validator;
 
         this.nyanCat = ResourceTools.loadImageFromResource("snakegame/nyan.cat.png");
-        this.nyanCat= ResourceTools.loadImageFromResource("snakegame/rainbow.png");
+        this.rainbow = ResourceTools.loadImageFromResource("snakegame/rainbow.png");
 
         //create the snake body
         body = new ArrayList<>();
@@ -43,7 +43,7 @@ public class NyanCat {
     private Grid grid;
     private Color bodyColor = Color.MAGENTA;
     private final MoveValidatorIntf validator;
-    private Image nyanCat;
+    private Image nyanCat, rainbow;
     private Image cat;
 
     public void draw(Graphics graphics) {
@@ -51,14 +51,13 @@ public class NyanCat {
 //            System.out.println("body location = " + body.get(i).toString());
 
             if (i == HEAD_POSITION) {
-                graphics.drawImage(cat, getGrid().getCellSystemCoordinate(getBody().get(i)).x,
+                graphics.drawImage(nyanCat, getGrid().getCellSystemCoordinate(getBody().get(i)).x,
                         getGrid().getCellSystemCoordinate(getBody().get(i)).y,
                         getGrid().getCellWidth(),
                         getGrid().getCellHeight(), null);
            
             } else {
-                
-                graphics.drawImage(nyanCat, getGrid().getCellSystemCoordinate(getBody().get(i)).x,
+                graphics.drawImage(rainbow, getGrid().getCellSystemCoordinate(getBody().get(i)).x,
                         getGrid().getCellSystemCoordinate(getBody().get(i)).y,
                         getGrid().getCellWidth(),
                         getGrid().getCellHeight(), null);
