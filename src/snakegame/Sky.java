@@ -5,6 +5,7 @@
  */
 package snakegame;
 
+import audio.AudioPlayer;
 import environment.Environment;
 import grid.Grid;
 import images.ResourceTools;
@@ -15,30 +16,42 @@ import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 /**
  *
  * @author Aleah
  */
-class Sky extends Environment implements MoveValidatorIntf {
+class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf {
 
     private Grid grid;
     public NyanCat cat;
     Image background;
+    private ArrayList<Item> items;
     
+    private String trackNameGameTimer;
+    private static String NYAN_CAT_LABEL = "NYAN_CAT";
+
     public Sky() {
-        grid = new Grid(25, 17, 32, 32, new Point(10, 10), Color.pink);
+        grid = new Grid(25, 17, 52, 36, new Point(10, 10), Color.pink);
         cat = new NyanCat(Direction.LEFT, grid, this);
 
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("snakegame/nyan_cat_background.jpg");
 
-        this.setBackground(temp.getScaledInstance(1000, 600, Image.SCALE_SMOOTH));
-        
-        
+        this.setBackground(temp.getScaledInstance(2000, 1200, Image.SCALE_SMOOTH));
+
+        items = new ArrayList<>();
+        items.add(new Item(10, 5, "POWER_UP",
+                ResourceTools.loadImageFromResource("snakegame/candycat_new.png"), this));
+
     }
 
     @Override
     public void initializeEnvironment() {
+//       
+//        this.trackNameGameTimer = NYAN_CAT_LABEL;
+//        ArrayList<Track> tracks = new ArrayList<>();
+//        tracks.add(new Track());
     }
 
     int moveDelay = 0;
@@ -72,7 +85,14 @@ class Sky extends Environment implements MoveValidatorIntf {
         } else if (e.getKeyCode() == KeyEvent.VK_UP) {
             cat.setDirection(Direction.UP);
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-       
+            cat.setDirection(Direction.DOWN);
+        } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+
+            AudioPlayer.play("/snakegame/cat_meow.wav");
+        } else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+
+            AudioPlayer.play("/snakegame/cat_scream.wav");
+
 //        } else if (e.getKeyCode() == KeyEvent.VK_1) {
 //           this.limit = LIMIT_SLOW;
 //        
@@ -86,12 +106,11 @@ class Sky extends Environment implements MoveValidatorIntf {
 //            this.limit = LIMIT_CRAZY;
 //        }
 //    
-       
 //            System.out.println("Key Event" + e.getKeyChar());
 //            System.out.println("Key Event" + e.getKeyCode());
 //            System.out.println("DOWN!!!");
             cat.setDirection(Direction.DOWN);
-            
+
         }
     }
 
@@ -123,6 +142,12 @@ class Sky extends Environment implements MoveValidatorIntf {
         if (cat != null) {
             cat.draw(graphics);
 
+            if (items != null) {
+                for (int i = 0; i < items.size(); i++) {
+                    items.get(i).draw(graphics);
+                }
+            }
+
         }
 
     }
@@ -153,4 +178,24 @@ class Sky extends Environment implements MoveValidatorIntf {
     }
 
 //</editor-fold>
+    @Override
+    public int getCellWidth() {
+        return grid.getCellWidth();
+    }
+
+    @Override
+    public int getCellHeight() {
+        return grid.getCellHeight();
+    }
+
+    @Override
+    public int getSystemCoordX(int x, int y) {
+        return grid.getCellSystemCoordinate(x, y).x;
+
+    }
+
+    @Override
+    public int getSystemCoorY(int x, int y) {
+        return grid.getCellSystemCoordinate(x, y).y;
+    }
 }
