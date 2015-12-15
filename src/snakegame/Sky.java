@@ -43,6 +43,14 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         items = new ArrayList<>();
         items.add(new Item(10, 5, "POWER_UP",
                 ResourceTools.loadImageFromResource("snakegame/candycat_new.png"), this));
+        items.add(new Item(5, 7, "POWER_UP",
+                ResourceTools.loadImageFromResource("snakegame/ice_cream.gif"), this));
+        items.add(new Item(3, 6, "POWER_UP",
+                ResourceTools.loadImageFromResource("snakegame/broccoli.png"), this));
+        items.add(new Item(5, 5, "POWER_UP",
+                ResourceTools.loadImageFromResource("snakegame/lollipop.png"), this));
+        items.add(new Item(7, 3, "POWER_UP",
+                ResourceTools.loadImageFromResource("snakegame/peppermint.png"), this));
 
     }
 
@@ -165,11 +173,22 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     public Point validateMove(Point proposedLocation) {
         if (proposedLocation.x < 0) {
 
-            if (proposedLocation.y > grid.getRows() / 2) {
+            if (proposedLocation.x < 0) {
                 proposedLocation.x++;
                 proposedLocation.y--;
-
+                cat.setDirection(Direction.RIGHT);
             }
+            
+            
+                
+                if (proposedLocation.x >= grid.getColumns()) {
+                proposedLocation.x++;
+                proposedLocation.y--;
+                cat.setDirection(Direction.LEFT);
+            
+            }
+
+            
 
             System.out.println("OUT OF BOUNDS!!!");
 
