@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import audio.SoundManager;
 import audio.Source;
 import audio.Track;
+
 /**
  *
  * @author Aleah
@@ -31,12 +32,11 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     Image background;
     private ArrayList<Item> items;
     private SoundManager soundManager;
-    
+
     private String trackNameGameTimer;
-    
 
     public Sky() {
-        
+
         grid = new Grid(25, 17, 52, 36, new Point(10, 10), Color.pink);
         cat = new NyanCat(Direction.LEFT, grid, this);
 
@@ -55,29 +55,25 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                 ResourceTools.loadImageFromResource("resource/lollipop.png"), this));
         items.add(new Item(7, 6, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/peppermint.png"), this));
-         items.add(new Item(8, 6, "POWER_UP",
+        items.add(new Item(8, 6, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/peppermint.png"), this));
-          items.add(new Item(2, 5, "POWER_UP",
-               ResourceTools.loadImageFromResource("resource/lollipop.png"), this));
-           items.add(new Item(2, 8, "POWER_UP",
+        items.add(new Item(2, 5, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/lollipop.png"), this));
+        items.add(new Item(2, 8, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/broccoli.png"), this));
-            items.add(new Item(9, 9, "POWER_UP",
+        items.add(new Item(9, 9, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/broccoli.png"), this));
-             items.add(new Item(2, 9, "POWER_UP",
+        items.add(new Item(2, 9, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
-              AudioPlayer.play("/resource/nyan_song.wav");
+        AudioPlayer.play("/resource/nyan_song.wav");
 
     }
 
     @Override
     public void initializeEnvironment() {
-       
-       
 
-       
         ArrayList<Track> tracks = new ArrayList<>();
-     
-         
+
     }
 
     int moveDelay = 0;
@@ -173,7 +169,6 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                     items.get(i).draw(graphics);
                 }
             }
-            
 
         }
 
@@ -197,18 +192,29 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                 proposedLocation.y--;
                 cat.setDirection(Direction.RIGHT);
             }
-            
-            
-                
-                if (proposedLocation.x >= grid.getColumns()) {
+
+            if (proposedLocation.x >= grid.getColumns()) {
                 proposedLocation.x++;
                 proposedLocation.y--;
                 cat.setDirection(Direction.LEFT);
-            
+
+            }
+            if (proposedLocation.y < 0) 
+           
+            if (proposedLocation.y < 0) {
+                proposedLocation.y++;
+                proposedLocation.x--;
+                cat.setDirection(Direction.RIGHT);
             }
 
-            
-        AudioPlayer.play("/resource/cat_scream.wav");
+            if (proposedLocation.y >= grid.getColumns()) {
+                proposedLocation.y++;
+                proposedLocation.x--;
+                cat.setDirection(Direction.LEFT);
+
+            }
+
+            AudioPlayer.play("/resource/cat_scream.wav");
             System.out.println("OUT OF BOUNDS!!!");
 
         }

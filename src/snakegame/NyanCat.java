@@ -35,7 +35,7 @@ public class NyanCat {
         body.add(new Point(5, 3));
         body.add(new Point(6, 3));
         body.add(new Point(7, 3));
-
+        body.add(new Point(8, 3));
     }
 
     private Direction direction = Direction.LEFT;
@@ -61,6 +61,9 @@ public class NyanCat {
                         getGrid().getCellSystemCoordinate(getBody().get(i)).y,
                         getGrid().getCellWidth(),
                         getGrid().getCellHeight(), null);
+
+                
+                
 
             }
 
@@ -94,7 +97,7 @@ public class NyanCat {
         } else if (getDirection() == Direction.DOWN) {
             newHead.y++;
         }
-
+   
         //add new head
         body.add(HEAD_POSITION, validator.validateMove(newHead));
 
