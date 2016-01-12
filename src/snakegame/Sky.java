@@ -17,7 +17,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-
+import audio.SoundManager;
+import audio.Source;
+import audio.Track;
 /**
  *
  * @author Aleah
@@ -28,38 +30,54 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     public NyanCat cat;
     Image background;
     private ArrayList<Item> items;
+    private SoundManager soundManager;
     
     private String trackNameGameTimer;
-    private static String NYAN_CAT_LABEL = "NYAN_CAT";
+    
 
     public Sky() {
+        
         grid = new Grid(25, 17, 52, 36, new Point(10, 10), Color.pink);
         cat = new NyanCat(Direction.LEFT, grid, this);
 
-        BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("snakegame/nyan_cat_background.jpg");
+        BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("resource/nyan_cat_background.jpg");
 
         this.setBackground(temp.getScaledInstance(2000, 1200, Image.SCALE_SMOOTH));
 
         items = new ArrayList<>();
         items.add(new Item(10, 5, "POWER_UP",
-                ResourceTools.loadImageFromResource("snakegame/candycat_new.png"), this));
+                ResourceTools.loadImageFromResource("resource/candycat_new.png"), this));
         items.add(new Item(5, 7, "POWER_UP",
-                ResourceTools.loadImageFromResource("snakegame/ice_cream.gif"), this));
+                ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
         items.add(new Item(3, 6, "POWER_UP",
-                ResourceTools.loadImageFromResource("snakegame/broccoli.png"), this));
+                ResourceTools.loadImageFromResource("resource/broccoli.png"), this));
         items.add(new Item(5, 5, "POWER_UP",
-                ResourceTools.loadImageFromResource("snakegame/lollipop.png"), this));
-        items.add(new Item(7, 3, "POWER_UP",
-                ResourceTools.loadImageFromResource("snakegame/peppermint.png"), this));
+                ResourceTools.loadImageFromResource("resource/lollipop.png"), this));
+        items.add(new Item(7, 6, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/peppermint.png"), this));
+         items.add(new Item(8, 6, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/peppermint.png"), this));
+          items.add(new Item(2, 5, "POWER_UP",
+               ResourceTools.loadImageFromResource("resource/lollipop.png"), this));
+           items.add(new Item(2, 8, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/broccoli.png"), this));
+            items.add(new Item(9, 9, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/broccoli.png"), this));
+             items.add(new Item(2, 9, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
+              AudioPlayer.play("/resource/nyan_song.wav");
 
     }
 
     @Override
     public void initializeEnvironment() {
-//       
-//        this.trackNameGameTimer = NYAN_CAT_LABEL;
-//        ArrayList<Track> tracks = new ArrayList<>();
-//        tracks.add(new Track());
+       
+       
+
+       
+        ArrayList<Track> tracks = new ArrayList<>();
+     
+         
     }
 
     int moveDelay = 0;
@@ -96,10 +114,10 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
             cat.setDirection(Direction.DOWN);
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 
-            AudioPlayer.play("/snakegame/cat_meow.wav");
+            AudioPlayer.play("/resource/cat_meow.wav");
         } else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
 
-            AudioPlayer.play("/snakegame/cat_scream.wav");
+            AudioPlayer.play("/resource/cat_scream.wav");
 
 //        } else if (e.getKeyCode() == KeyEvent.VK_1) {
 //           this.limit = LIMIT_SLOW;
@@ -155,6 +173,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                     items.get(i).draw(graphics);
                 }
             }
+            
 
         }
 
@@ -189,7 +208,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
             }
 
             
-
+        AudioPlayer.play("/resource/cat_scream.wav");
             System.out.println("OUT OF BOUNDS!!!");
 
         }

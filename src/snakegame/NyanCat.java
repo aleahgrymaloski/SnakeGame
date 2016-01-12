@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -25,8 +25,8 @@ public class NyanCat {
         this.grid = grid;
         this.validator = validator;
 
-        this.nyanCat = ResourceTools.loadImageFromResource("snakegame/nyan.cat.png");
-        this.rainbow = ResourceTools.loadImageFromResource("snakegame/rainbow.png");
+        this.nyanCat = ResourceTools.loadImageFromResource("resource/nyan.cat.png");
+        this.rainbow = ResourceTools.loadImageFromResource("resource/rainbow.png");
 
         //create the snake body
         body = new ArrayList<>();
