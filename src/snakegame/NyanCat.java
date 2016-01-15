@@ -25,7 +25,8 @@ public class NyanCat {
         this.grid = grid;
         this.validator = validator;
 
-        this.nyanCat = ResourceTools.loadImageFromResource("resource/nyan.cat.png");
+        this.nyanCatRight = ResourceTools.loadImageFromResource("resource/nyan_cat.png");
+        this.nyanCatLeft = ResourceTools.loadImageFromResource("resource/nyan_cat_invert.png");
         this.rainbow = ResourceTools.loadImageFromResource("resource/rainbow.png");
 
         //create the snake body
@@ -43,7 +44,7 @@ public class NyanCat {
     private Grid grid;
     private Color bodyColor = Color.MAGENTA;
     private final MoveValidatorIntf validator;
-    private Image nyanCat, rainbow;
+    private Image nyanCatRight, nyanCatLeft, rainbow;
     private Image cat;
 
     public void draw(Graphics graphics) {
@@ -51,22 +52,33 @@ public class NyanCat {
 //            System.out.println("body location = " + body.get(i).toString());
 
             if (i == HEAD_POSITION) {
-                graphics.drawImage(nyanCat, getGrid().getCellSystemCoordinate(getBody().get(i)).x,
+                graphics.drawImage(getNyanCat(), getGrid().getCellSystemCoordinate(getBody().get(i)).x,
                         getGrid().getCellSystemCoordinate(getBody().get(i)).y,
                         getGrid().getCellWidth(),
                         getGrid().getCellHeight(), null);
-           
+
             } else {
                 graphics.drawImage(rainbow, getGrid().getCellSystemCoordinate(getBody().get(i)).x,
                         getGrid().getCellSystemCoordinate(getBody().get(i)).y,
                         getGrid().getCellWidth(),
                         getGrid().getCellHeight(), null);
 
-                
-                
-
             }
 
+//        
+        }
+    }
+
+    private Image getNyanCat() {
+        if (direction == Direction.RIGHT) {
+            return nyanCatRight;
+        } else {
+            return nyanCatLeft;
+        }
+        
+    }
+
+//            if left button is pressed, draw nyan_cat_reverse
 //            if i/null = head(graphics.setColor(Color.blue)){
 //           
 //            else if graphics.setColor(Color.green)
@@ -81,9 +93,6 @@ public class NyanCat {
 //            
 //                if (i =/null) graphics.setColor(java.awt.Color.pink);
 //            else if (i/= null ) graphics.setColor(java.awt.Color.yellow);
-        }
-    }
-
     public void move() {
         //make a copy of the current head location
         Point newHead = new Point(getHead());
@@ -97,7 +106,7 @@ public class NyanCat {
         } else if (getDirection() == Direction.DOWN) {
             newHead.y++;
         }
-   
+
         //add new head
         body.add(HEAD_POSITION, validator.validateMove(newHead));
 
@@ -169,4 +178,5 @@ public class NyanCat {
     public void setBodyColor(Color bodyColor) {
         this.bodyColor = bodyColor;
     }
+
 }

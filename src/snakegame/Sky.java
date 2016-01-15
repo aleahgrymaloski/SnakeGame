@@ -37,7 +37,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 
     public Sky() {
 
-        grid = new Grid(25, 17, 52, 36, new Point(10, 10), Color.pink);
+        grid = new Grid(25, 17, 52, 36, new Point(10, 10), new Color (2, 49, 178));
         cat = new NyanCat(Direction.LEFT, grid, this);
 
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("resource/nyan_cat_background.jpg");
@@ -45,27 +45,30 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         this.setBackground(temp.getScaledInstance(2000, 1200, Image.SCALE_SMOOTH));
 
         items = new ArrayList<>();
-        items.add(new Item(10, 5, "POWER_UP",
+        items.add(new Item(10, 12, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/candycat_new.png"), this));
-        items.add(new Item(5, 7, "POWER_UP",
+        items.add(new Item(5, 8, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
-        items.add(new Item(3, 6, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/broccoli.png"), this));
-        items.add(new Item(5, 5, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/lollipop.png"), this));
-        items.add(new Item(7, 6, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/peppermint.png"), this));
-        items.add(new Item(8, 6, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/peppermint.png"), this));
-        items.add(new Item(2, 5, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/lollipop.png"), this));
-        items.add(new Item(2, 8, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/broccoli.png"), this));
+        items.add(new Item(2, 2, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
+                
         items.add(new Item(9, 9, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/broccoli.png"), this));
-        items.add(new Item(2, 9, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
+        items.add(new Item(1, 6, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/peppermint.png"), this));
+        items.add(new Item(6, 7, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
+        items.add(new Item(12, 8, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
+        items.add(new Item(4, 9, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
+               
+        items.add(new Item(2, 10, "POWER_UP",
+                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
+               
+        items.add(new Item(6, 8, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
-        AudioPlayer.play("/resource/nyan_song.wav");
+        
 
     }
 
@@ -215,7 +218,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
             }
 
             AudioPlayer.play("/resource/cat_scream.wav");
-            System.out.println("OUT OF BOUNDS!!!");
+            
 
         }
         return proposedLocation;
