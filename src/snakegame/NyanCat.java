@@ -25,9 +25,11 @@ public class NyanCat {
         this.grid = grid;
         this.validator = validator;
 
-        this.nyanCatRight = ResourceTools.loadImageFromResource("resource/nyan_cat.png");
-        this.nyanCatLeft = ResourceTools.loadImageFromResource("resource/nyan_cat_invert.png");
+        this.nyanCatRight = ResourceTools.loadImageFromResource("resource/nyan.cat.png");
+        this.nyanCatLeft = ResourceTools.loadImageFromResource("resource/new_invert.png");
         this.rainbow = ResourceTools.loadImageFromResource("resource/rainbow.png");
+        this.rainbowUp = ResourceTools.loadImageFromResource("resource/rainbow_up.png");
+        this.rainbowDown = ResourceTools.loadImageFromResource("resource/rainbow_up.png");
 
         //create the snake body
         body = new ArrayList<>();
@@ -44,7 +46,7 @@ public class NyanCat {
     private Grid grid;
     private Color bodyColor = Color.MAGENTA;
     private final MoveValidatorIntf validator;
-    private Image nyanCatRight, nyanCatLeft, rainbow;
+    private Image nyanCatRight, nyanCatLeft, rainbow, rainbowUp, rainbowDown;
     private Image cat;
 
     public void draw(Graphics graphics) {
@@ -75,7 +77,16 @@ public class NyanCat {
         } else {
             return nyanCatLeft;
         }
-        
+
+    }
+
+    private Image getRainbow() {
+        if (direction == Direction.UP) {
+            return rainbowUp;
+        } else {
+          
+            return rainbow;
+        }
     }
 
 //            if left button is pressed, draw nyan_cat_reverse

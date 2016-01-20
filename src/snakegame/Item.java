@@ -1,6 +1,7 @@
 package snakegame;
 
 
+import images.ResourceTools;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -20,6 +21,7 @@ public class Item {
     }
     public void draw(Graphics graphics){
         
+        
         graphics.drawImage(getImage(),
         getCellData().getSystemCoordX(getX(), getY()),
         getCellData().getSystemCoordX(getX(), getY()),
@@ -37,17 +39,30 @@ public class Item {
         this.type =type;
         this.image =image;
         this.cellData = cellData;
-
+        
+        if (type.equals(ITEM_TYPE_BROCCOLI)){
+        image = ResourceTools.loadImageFromResource("resource/broccoli_pixel.png");
+    }
 
         
    
     }
     
+    public static final String ITEM_TYPE_BROCCOLI = "BROCCOLI";
+    public static final String ITEM_TYPE_CANDY = "CANDY";
+    public static final String ITEM_TYPE_CUPCAKE = "CUPCAKE";
+    
+
+
+      
+    
      private int x,y;
     private String type;
     private Image image;
     private CellDataProviderIntf cellData;
-
+    private MoveValidatorIntf moveValidator;
+    private boolean alive;
+    
     
      
     public int getX() {

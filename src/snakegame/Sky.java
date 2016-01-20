@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import audio.SoundManager;
 import audio.Source;
 import audio.Track;
+import java.awt.Font;
 
 /**
  *
@@ -32,7 +33,8 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     Image background;
     private ArrayList<Item> items;
     private SoundManager soundManager;
-
+    private int score;
+    
     private String trackNameGameTimer;
 
     public Sky() {
@@ -45,6 +47,9 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         this.setBackground(temp.getScaledInstance(2000, 1200, Image.SCALE_SMOOTH));
 
         items = new ArrayList<>();
+        
+        items.add(new Item(1, 5, Item.ITEM_TYPE_BROCCOLI, 
+                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
         items.add(new Item(10, 12, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/candycat_new.png"), this));
         items.add(new Item(5, 8, "POWER_UP",
@@ -69,7 +74,6 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         items.add(new Item(6, 8, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
         
-
     }
 
     @Override
@@ -174,7 +178,9 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
             }
 
         }
-
+        graphics.setColor(Color.white);
+        graphics.setFont(new Font("Calibri",  Font.BOLD, 35));
+        graphics.drawString("Score: " + score, 10, 20);
     }
 
     public void sky(Graphics graphics) {
