@@ -34,6 +34,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     private ArrayList<Item> items;
     private SoundManager soundManager;
     private int score;
+   
     
     private String trackNameGameTimer;
 
@@ -181,6 +182,8 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         graphics.setColor(Color.white);
         graphics.setFont(new Font("Calibri",  Font.BOLD, 35));
         graphics.drawString("Score: " + score, 10, 20);
+//        cat.move();
+//        score ++;
     }
 
     public void sky(Graphics graphics) {
@@ -195,33 +198,39 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     @Override
     public Point validateMove(Point proposedLocation) {
         if (proposedLocation.x < 0) {
+            proposedLocation.x = grid.getColumns() -1;
+        } else if (proposedLocation.x > grid.getColumns() - 1) {
+            proposedLocation.x = 0;
+        } if (proposedLocation.y < 0) {
+            proposedLocation.y = grid.getRows() - 1;
+            
 
-            if (proposedLocation.x < 0) {
-                proposedLocation.x++;
-                proposedLocation.y--;
-                cat.setDirection(Direction.RIGHT);
-            }
-
-            if (proposedLocation.x >= grid.getColumns()) {
-                proposedLocation.x++;
-                proposedLocation.y--;
-                cat.setDirection(Direction.LEFT);
-
-            }
-            if (proposedLocation.y < 0) 
-           
-            if (proposedLocation.y < 0) {
-                proposedLocation.y++;
-                proposedLocation.x--;
-                cat.setDirection(Direction.RIGHT);
-            }
-
-            if (proposedLocation.y >= grid.getColumns()) {
-                proposedLocation.y++;
-                proposedLocation.x--;
-                cat.setDirection(Direction.LEFT);
-
-            }
+//            if (proposedLocation.x < 0) {
+//                proposedLocation.x++;
+//                proposedLocation.y--;
+//                cat.setDirection(Direction.RIGHT);
+//            }
+//
+//            if (proposedLocation.x >= grid.getColumns()) {
+//                proposedLocation.x++;
+//                proposedLocation.y--;
+//                cat.setDirection(Direction.LEFT);
+//
+//            }
+//            if (proposedLocation.y < 0) 
+//           
+//            if (proposedLocation.y < 0) {
+//                proposedLocation.y++;
+//                proposedLocation.x--;
+//                cat.setDirection(Direction.RIGHT);
+//            }
+//
+//            if (proposedLocation.y >= grid.getColumns()) {
+//                proposedLocation.y++;
+//                proposedLocation.x--;
+//                cat.setDirection(Direction.LEFT);
+//
+//            }
 
             AudioPlayer.play("/resource/cat_scream.wav");
             
