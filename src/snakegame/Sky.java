@@ -95,10 +95,10 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         if (cat != null) {
             if (moveDelay >= moveDelayLimit) {
                 cat.move();
+                score ++;
                 moveDelay = 0;
             } else {
                 moveDelay++;
-
             }
         }
     }
@@ -182,8 +182,6 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         graphics.setColor(Color.white);
         graphics.setFont(new Font("Calibri",  Font.BOLD, 35));
         graphics.drawString("Score: " + score, 10, 20);
-//        cat.move();
-//        score ++;
     }
 
     public void sky(Graphics graphics) {

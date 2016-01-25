@@ -8,6 +8,7 @@
             <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/SoundManager.java</file>
             <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/CellDataProviderIntf.java</file>
             <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/Sky.java</file>
+            <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/MoveValidatorIntf.java</file>
             <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/Direction.java</file>
             <file>file:/Users/Aleah/NetBeansProjects/SnakeGame/src/snakegame/NyanCat.java</file>
         </group>
