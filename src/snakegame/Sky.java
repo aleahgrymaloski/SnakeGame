@@ -75,6 +75,9 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         items.add(new Item(6, 8, "POWER_UP",
                 ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
         
+        
+        AudioPlayer.play("/resource/nyan_song.wav", -1);
+
     }
 
     @Override
@@ -91,7 +94,6 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 
     @Override
     public void timerTaskHandler() {
-//        System.out.println("Hey dude..." + ++counter);
         if (cat != null) {
             if (moveDelay >= moveDelayLimit) {
                 cat.move();
@@ -105,8 +107,6 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 
     @Override
     public void keyPressedHandler(KeyEvent e) {
-//        System.out.println("Key Event" + e.getKeyChar());
-//        System.out.println("Key Event" + e.getKeyCode());
 
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
             cat.setDirection(Direction.LEFT);
@@ -117,50 +117,19 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             cat.setDirection(Direction.DOWN);
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-
             AudioPlayer.play("/resource/cat_meow.wav");
         } else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-
             AudioPlayer.play("/resource/cat_scream.wav");
-
-//        } else if (e.getKeyCode() == KeyEvent.VK_1) {
-//           this.limit = LIMIT_SLOW;
-//        
-//        } else if (e.getKeyCode() == KeyEvent.VK_2) {
-//            this.limit = LIMIT_MEDIUM;
-//       
-//         } else if (e.getKeyCode() == KeyEvent.VK_3) {
-//            this.limit = LIMIT_FAST;
-//       
-//         } else if (e.getKeyCode() == KeyEvent.VK_4) {
-//            this.limit = LIMIT_CRAZY;
-//        }
-//    
-//            System.out.println("Key Event" + e.getKeyChar());
-//            System.out.println("Key Event" + e.getKeyCode());
-//            System.out.println("DOWN!!!");
-            cat.setDirection(Direction.DOWN);
-
         }
     }
 
     @Override
     public void keyReleasedHandler(KeyEvent e) {
-//        if (e.getKeyCode()== KeyEvent.VK_W){
-//            System.out.println("Go Left!");
-//        } else if (e.getKeyCode()== KeyEvent.VK_A) {
-//            System.out.println("Go Right!");
-//        } else if (e.getKeyCode()== KeyEvent.VK_S) {
-//            System.out.println("Go UP!");
-//    } else if (e.getKeyCode()== KeyEvent.VK_D) {
-//            System.out.println("Go Down!");
-//        }
     }
 
     @Override
     public void environmentMouseClicked(MouseEvent e) {
-        System.out.println("mouse clicked at " + e.getPoint());
-        System.out.println("mouse clicked at " + grid.getCellLocationFromSystemCoordinate(e.getPoint()));
+       
 
     }
 
@@ -180,7 +149,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 
         }
         graphics.setColor(Color.white);
-        graphics.setFont(new Font("Calibri",  Font.BOLD, 35));
+        graphics.setFont(new Font("Typewriter",  Font.BOLD, 35));
         graphics.drawString("Score: " + score, 10, 20);
     }
 

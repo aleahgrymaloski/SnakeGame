@@ -84,7 +84,7 @@ public class NyanCat {
         if (direction == Direction.UP) {
             return rainbowUp;
         } else {
-          
+
             return rainbow;
         }
     }
@@ -121,7 +121,6 @@ public class NyanCat {
         //add new head
         body.add(HEAD_POSITION, validator.validateMove(newHead));
 
-//        this.getHead(image = ResourceTools.loadImageFromResource("nyancat_catgif.gif"));
         //delete tail
         getBody().remove(getBody().size() - 1);
 
