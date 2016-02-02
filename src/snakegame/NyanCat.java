@@ -24,7 +24,8 @@ public class NyanCat {
         this.direction = direction;
         this.grid = grid;
         this.validator = validator;
-
+ 
+        
         this.nyanCatRight = ResourceTools.loadImageFromResource("resource/nyan.cat.png");
         this.nyanCatLeft = ResourceTools.loadImageFromResource("resource/new_invert.png");
         this.rainbow = ResourceTools.loadImageFromResource("resource/rainbow.png");
@@ -47,7 +48,8 @@ public class NyanCat {
     private Color bodyColor = Color.MAGENTA;
     private final MoveValidatorIntf validator;
     private Image nyanCatRight, nyanCatLeft, rainbow, rainbowUp, rainbowDown;
-    private Image cat;
+  
+   
 
     public void draw(Graphics graphics) {
         for (int i = 0; i < getBody().size(); i++) {
@@ -86,6 +88,7 @@ public class NyanCat {
         } else {
 
             return rainbow;
+          
         }
     }
 
@@ -123,7 +126,6 @@ public class NyanCat {
 
         //delete tail
         getBody().remove(getBody().size() - 1);
-
     }
 
     public Point getHead() {

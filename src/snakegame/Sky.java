@@ -77,6 +77,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         
         
         AudioPlayer.play("/resource/nyan_song.wav", -1);
+       
 
     }
 
@@ -165,11 +166,13 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     @Override
     public Point validateMove(Point proposedLocation) {
         if (proposedLocation.x < 0) {
-            proposedLocation.x = grid.getColumns() -1;
-        } else if (proposedLocation.x > grid.getColumns() - 1) {
+            proposedLocation.x = grid.getColumns() - 1;
+        } else if (proposedLocation.x > grid.getColumns() - 1 ) {
             proposedLocation.x = 0;
         } if (proposedLocation.y < 0) {
             proposedLocation.y = grid.getRows() - 1;
+        } else if (proposedLocation.y > grid.getColumns() - 1 ) {
+            proposedLocation.y = 0;
             
 
 //            if (proposedLocation.x < 0) {
@@ -199,7 +202,6 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 //
 //            }
 
-            AudioPlayer.play("/resource/cat_scream.wav");
             
 
         }
