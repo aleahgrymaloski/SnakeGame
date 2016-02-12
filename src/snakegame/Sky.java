@@ -6,6 +6,7 @@
 package snakegame;
 
 import audio.AudioPlayer;
+import audio.Playlist;
 import environment.Environment;
 import grid.Grid;
 import images.ResourceTools;
@@ -32,7 +33,6 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     public NyanCat cat;
     Image background;
     private ArrayList<Item> items;
-    private SoundManager soundManager;
     private int score;
    
     
@@ -49,38 +49,56 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 
         items = new ArrayList<>();
         
-        items.add(new Item(1, 5, Item.ITEM_TYPE_BROCCOLI, 
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_BROCCOLI, 
                 ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
-        items.add(new Item(10, 12, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/candycat_new.png"), this));
-        items.add(new Item(5, 8, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
-        items.add(new Item(2, 2, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
-                
-        items.add(new Item(9, 9, "POWER_UP",
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_CANDY,
                 ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
-        items.add(new Item(1, 6, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/peppermint.png"), this));
-        items.add(new Item(6, 7, "POWER_UP",
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_CANDY,
                 ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
-        items.add(new Item(12, 8, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
-        items.add(new Item(4, 9, "POWER_UP",
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_BROCCOLI,
                 ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
-               
-        items.add(new Item(2, 10, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
-               
-        items.add(new Item(6, 8, "POWER_UP",
-                ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
+//                
+//        items.add(new Item(9, 9, "POWER_UP",
+//                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
+//        items.add(new Item(1, 6, "POWER_UP",
+//                ResourceTools.loadImageFromResource("resource/peppermint.png"), this));
+//        items.add(new Item(6, 7, "POWER_UP",
+//                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
+//        items.add(new Item(12, 8, "POWER_UP",
+//                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
+//        items.add(new Item(4, 9, Item.ITEM_TYPE_BROCCOLI,
+//                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
+//               
+//        items.add(new Item(2, 10, "POWER_UP",
+//                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
+//               
+//        items.add(new Item(6, 8, "POWER_UP",
+//                ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
         
         
-        AudioPlayer.play("/resource/nyan_song.wav", -1);
-       
-
+//        AudioPlayer.play("/resource/nyan_song.wav", -1);
+        
+        setUpSound();
     }
 
+    //accept an int, returns a random number betwee zero and int
+    private int getRandom(int maximum){
+        return (int) (Math.random() * maximum );
+    }
+    
+    SoundManager soundManager;
+    public static final String NYAN_SONG = "nyan";
+    
+    private void setUpSound(){
+        // set up a list of tracks in a playlist
+        ArrayList<Track> tracks = new ArrayList<>();
+        tracks.add(new Track(NYAN_SONG, Source.RESOURCE, "/resource/cat_meow.wav"));
+        
+        Playlist playlist = new Playlist(tracks);
+        // pass the playlist to a sound manager
+        soundManager = new SoundManager(playlist);
+    }
+    
     @Override
     public void initializeEnvironment() {
 
@@ -120,7 +138,8 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             AudioPlayer.play("/resource/cat_meow.wav");
         } else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-            AudioPlayer.play("/resource/cat_scream.wav");
+            soundManager.play(NYAN_SONG, 3);
+         
         }
     }
 
@@ -131,7 +150,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     @Override
     public void environmentMouseClicked(MouseEvent e) {
        
-
+    
     }
 
     @Override
@@ -162,9 +181,11 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 
     }
 
-    //<editor-fold defaultstate="collapsed" desc="MoveValidator">
+//<editor-fold defaultstate="collapsed" desc="MoveValidator">
     @Override
     public Point validateMove(Point proposedLocation) {
+        
+        //check if off grid
         if (proposedLocation.x < 0) {
             proposedLocation.x = grid.getColumns() - 1;
         } else if (proposedLocation.x > grid.getColumns() - 1 ) {
@@ -173,60 +194,49 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
             proposedLocation.y = grid.getRows() - 1;
         } else if (proposedLocation.y > grid.getColumns() - 1 ) {
             proposedLocation.y = 0;
-            
-
-//            if (proposedLocation.x < 0) {
-//                proposedLocation.x++;
-//                proposedLocation.y--;
-//                cat.setDirection(Direction.RIGHT);
-//            }
-//
-//            if (proposedLocation.x >= grid.getColumns()) {
-//                proposedLocation.x++;
-//                proposedLocation.y--;
-//                cat.setDirection(Direction.LEFT);
-//
-//            }
-//            if (proposedLocation.y < 0) 
-//           
-//            if (proposedLocation.y < 0) {
-//                proposedLocation.y++;
-//                proposedLocation.x--;
-//                cat.setDirection(Direction.RIGHT);
-//            }
-//
-//            if (proposedLocation.y >= grid.getColumns()) {
-//                proposedLocation.y++;
-//                proposedLocation.x--;
-//                cat.setDirection(Direction.LEFT);
-//
-//            }
-
-            
-
         }
+        
+//        //check if cat hit items
+//        for (Item item : items){
+//            if (item.getLocation().equals(proposedLocation)){
+//                //if item is BROCOLLI - kill the darn cat
+//                if (item.getType().equals(Item.ITEM_TYPE_CANDY)) {
+//                    //if item is CANDY then move candy and get points and grow...
+//                    
+//                    item.setX(getRandom(grid.getColumns()));
+//                    item.setY(getRandom(grid.getColumns()));
+//                    
+//                    
+//                }
+//            }
+//        }
+//        
+        
         return proposedLocation;
     }
 
 //</editor-fold>
+    
+//<editor-fold defaultstate="collapsed" desc="CellDataProviderIntf">
     @Override
     public int getCellWidth() {
         return grid.getCellWidth();
     }
-
+    
     @Override
     public int getCellHeight() {
         return grid.getCellHeight();
     }
-
+    
     @Override
     public int getSystemCoordX(int x, int y) {
         return grid.getCellSystemCoordinate(x, y).x;
-
+        
     }
-
+    
     @Override
-    public int getSystemCoorY(int x, int y) {
+    public int getSystemCoordY(int x, int y) {
         return grid.getCellSystemCoordinate(x, y).y;
     }
+//</editor-fold>
 }

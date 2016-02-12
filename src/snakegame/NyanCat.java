@@ -12,7 +12,6 @@ import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
 import javafx.scene.paint.Color;
-import static javafx.scene.paint.Color.color;
 
 /**
  *
@@ -24,6 +23,7 @@ public class NyanCat {
         this.direction = direction;
         this.grid = grid;
         this.validator = validator;
+        
  
         
         this.nyanCatRight = ResourceTools.loadImageFromResource("resource/nyan.cat.png");
@@ -48,7 +48,7 @@ public class NyanCat {
     private Color bodyColor = Color.MAGENTA;
     private final MoveValidatorIntf validator;
     private Image nyanCatRight, nyanCatLeft, rainbow, rainbowUp, rainbowDown;
-  
+    private int growthCounter;
    
 
     public void draw(Graphics graphics) {
@@ -133,6 +133,9 @@ public class NyanCat {
 
     }
 
+    public void grow(int length){
+        growthCounter += length;
+    }
     private static final int HEAD_POSITION = 0;
 
     /**
