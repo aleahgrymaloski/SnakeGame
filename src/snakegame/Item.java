@@ -41,6 +41,7 @@ public class Item {
     public static final String ITEM_TYPE_BROCCOLI = "BROCCOLI";
     public static final String ITEM_TYPE_CANDY = "CANDY";
     public static final String ITEM_TYPE_CUPCAKE = "CUPCAKE";
+    public static final String ITEM_TYPE_ICECREAM = "ICECREAM";
 
     private int x, y;
     private String type;

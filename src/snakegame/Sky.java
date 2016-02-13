@@ -40,12 +40,12 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 
     public Sky() {
 
-        grid = new Grid(25, 17, 52, 36, new Point(10, 10), new Color (2, 49, 178));
+        grid = new Grid(17, 16, 52, 36, new Point(10, 10), new Color (2, 49, 178, 1));
         cat = new NyanCat(Direction.LEFT, grid, this);
 
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("resource/nyan_cat_background.jpg");
 
-        this.setBackground(temp.getScaledInstance(2000, 1200, Image.SCALE_SMOOTH));
+        this.setBackground(temp.getScaledInstance(1000, 700, Image.SCALE_SMOOTH));
 
         items = new ArrayList<>();
         
@@ -57,28 +57,32 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                 ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_BROCCOLI,
                 ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
-//                
-//        items.add(new Item(9, 9, "POWER_UP",
-//                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
-//        items.add(new Item(1, 6, "POWER_UP",
-//                ResourceTools.loadImageFromResource("resource/peppermint.png"), this));
-//        items.add(new Item(6, 7, "POWER_UP",
-//                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
-//        items.add(new Item(12, 8, "POWER_UP",
-//                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
-//        items.add(new Item(4, 9, Item.ITEM_TYPE_BROCCOLI,
-//                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
-//               
-//        items.add(new Item(2, 10, "POWER_UP",
-//                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
-//               
-//        items.add(new Item(6, 8, "POWER_UP",
-//                ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
+                
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_CANDY,             
+                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_CANDY,
+                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_CANDY,
+                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_BROCCOLI, 
+               ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
+               
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_BROCCOLI, 
+                ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
+             
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_ICECREAM, 
+                ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_ICECREAM, 
+                ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_ICECREAM, 
+                ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
         
         
 //        AudioPlayer.play("/resource/nyan_song.wav", -1);
         
         setUpSound();
+        
+          soundManager.play(NYAN_SONG, -1);
     }
 
     //accept an int, returns a random number betwee zero and int
@@ -92,7 +96,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     private void setUpSound(){
         // set up a list of tracks in a playlist
         ArrayList<Track> tracks = new ArrayList<>();
-        tracks.add(new Track(NYAN_SONG, Source.RESOURCE, "/resource/cat_meow.wav"));
+        tracks.add(new Track(NYAN_SONG, Source.RESOURCE, "/resource/nyan_song.wav"));
         
         Playlist playlist = new Playlist(tracks);
         // pass the playlist to a sound manager
@@ -138,7 +142,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
             AudioPlayer.play("/resource/cat_meow.wav");
         } else if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-            soundManager.play(NYAN_SONG, 3);
+          
          
         }
     }

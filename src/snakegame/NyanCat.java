@@ -23,9 +23,7 @@ public class NyanCat {
         this.direction = direction;
         this.grid = grid;
         this.validator = validator;
-        
- 
-        
+
         this.nyanCatRight = ResourceTools.loadImageFromResource("resource/nyan.cat.png");
         this.nyanCatLeft = ResourceTools.loadImageFromResource("resource/new_invert.png");
         this.rainbow = ResourceTools.loadImageFromResource("resource/rainbow.png");
@@ -49,7 +47,6 @@ public class NyanCat {
     private final MoveValidatorIntf validator;
     private Image nyanCatRight, nyanCatLeft, rainbow, rainbowUp, rainbowDown;
     private int growthCounter;
-   
 
     public void draw(Graphics graphics) {
         for (int i = 0; i < getBody().size(); i++) {
@@ -76,37 +73,37 @@ public class NyanCat {
     private Image getNyanCat() {
         if (direction == Direction.RIGHT) {
             return nyanCatRight;
+       
         } else {
+           
             return nyanCatLeft;
+            
         }
 
     }
 
-    private Image getRainbow() {
+    private Image getRainbowUp() {
         if (direction == Direction.UP) {
             return rainbowUp;
+        
         } else {
 
             return rainbow;
-          
+
         }
     }
 
-//            if left button is pressed, draw nyan_cat_reverse
-//            if i/null = head(graphics.setColor(Color.blue)){
-//           
-//            else if graphics.setColor(Color.green)
-//            
-//        }
-//             for (int z = 0; z < dots; z++) {
-//                if (z == 0) {
-//                    graphics.drawImage(head, x[z], y[z], this);
-//                } else {
-//                    graphics.drawImage(ball, x[z], y[z], this);
-//                }
-//            
-//                if (i =/null) graphics.setColor(java.awt.Color.pink);
-//            else if (i/= null ) graphics.setColor(java.awt.Color.yellow);
+    private Image getRainbowDown() {
+        if (direction == Direction.DOWN) {
+            return rainbowDown;
+
+        } else {
+
+            return rainbow;
+        }
+    }
+
+
     public void move() {
         //make a copy of the current head location
         Point newHead = new Point(getHead());
@@ -133,8 +130,8 @@ public class NyanCat {
 
     }
 
-    public void grow(int length){
-        growthCounter += length;
+    public void grow(int length) {
+        setGrowthCounter(getGrowthCounter() + length);
     }
     private static final int HEAD_POSITION = 0;
 
@@ -194,4 +191,21 @@ public class NyanCat {
         this.bodyColor = bodyColor;
     }
 
+    /**
+     * @return the growthCounter
+     */
+    public int getGrowthCounter() {
+        return growthCounter;
+    }
+
+    /**
+     * @param growthCounter the growthCounter to set
+     */
+    public void setGrowthCounter(int growthCounter) {
+        this.growthCounter = growthCounter;
+    }
+
+    public void addGrowthCounter(int growthCounter) {
+        this.growthCounter += growthCounter;
+    }
 }
