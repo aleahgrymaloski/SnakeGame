@@ -29,6 +29,8 @@ public class NyanCat {
         this.rainbow = ResourceTools.loadImageFromResource("resource/rainbow.png");
         this.rainbowUp = ResourceTools.loadImageFromResource("resource/rainbow_up.png");
         this.rainbowDown = ResourceTools.loadImageFromResource("resource/rainbow_up.png");
+        
+
 
         //create the snake body
         body = new ArrayList<>();
@@ -47,10 +49,10 @@ public class NyanCat {
     private final MoveValidatorIntf validator;
     private Image nyanCatRight, nyanCatLeft, rainbow, rainbowUp, rainbowDown;
     private int growthCounter;
-
+    private Image toaster;
+   
     public void draw(Graphics graphics) {
         for (int i = 0; i < getBody().size(); i++) {
-//            System.out.println("body location = " + body.get(i).toString());
 
             if (i == HEAD_POSITION) {
                 graphics.drawImage(getNyanCat(), getGrid().getCellSystemCoordinate(getBody().get(i)).x,
@@ -73,11 +75,11 @@ public class NyanCat {
     private Image getNyanCat() {
         if (direction == Direction.RIGHT) {
             return nyanCatRight;
-       
+
         } else {
-           
+
             return nyanCatLeft;
-            
+
         }
 
     }
@@ -85,7 +87,7 @@ public class NyanCat {
     private Image getRainbowUp() {
         if (direction == Direction.UP) {
             return rainbowUp;
-        
+
         } else {
 
             return rainbow;
@@ -102,7 +104,6 @@ public class NyanCat {
             return rainbow;
         }
     }
-
 
     public void move() {
         //make a copy of the current head location

@@ -32,16 +32,24 @@ public class Item {
         this.image = image;
         this.cellData = cellData;
 
-        if (type.equals(ITEM_TYPE_BROCCOLI)) {
+      if (type.equals(ITEM_TYPE_BROCCOLI)) {
             image = ResourceTools.loadImageFromResource("resource/broccoli_pixel.png");
+
         }
 
+//        if (type.equals(ITEM_TYPE_CANDY)) {
+//           image = ResourceTools.loadImageFromResource("resource/pink_candy.png");
+//        }
+//
+//        if (type.equals(ITEM_TYPE_ICECREAM)) {
+//           image = ResourceTools.loadImageFromResource("resource/ice_cream.gif");
+//        }
     }
 
     public static final String ITEM_TYPE_BROCCOLI = "BROCCOLI";
     public static final String ITEM_TYPE_CANDY = "CANDY";
-    public static final String ITEM_TYPE_CUPCAKE = "CUPCAKE";
     public static final String ITEM_TYPE_ICECREAM = "ICECREAM";
+    public static final String ITEM_TYPE_TOASTER = "TOASTER";
 
     private int x, y;
     private String type;
@@ -50,10 +58,10 @@ public class Item {
     private MoveValidatorIntf moveValidator;
     private boolean alive;
 
-    public Point getLocation(){
+    public Point getLocation() {
         return new Point(x, y);
     }
-    
+
     public int getX() {
         return x;
     }
