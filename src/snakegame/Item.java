@@ -36,6 +36,11 @@ public class Item {
             image = ResourceTools.loadImageFromResource("resource/broccoli_pixel.png");
 
         }
+      
+//       if (type.equals(ITEM_TYPE_TOASTER)) {
+//            image = ResourceTools.loadImageFromResource("resource/toster.tiff");
+//
+//        }
 
 //        if (type.equals(ITEM_TYPE_CANDY)) {
 //           image = ResourceTools.loadImageFromResource("resource/pink_candy.png");
@@ -50,6 +55,7 @@ public class Item {
     public static final String ITEM_TYPE_CANDY = "CANDY";
     public static final String ITEM_TYPE_ICECREAM = "ICECREAM";
     public static final String ITEM_TYPE_TOASTER = "TOASTER";
+    public static final String ITEM_TYPE_SUPERCANDY = "SUPERCANDY";
 
     private int x, y;
     private String type;

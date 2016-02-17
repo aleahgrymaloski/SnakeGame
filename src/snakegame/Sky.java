@@ -42,19 +42,16 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
      */
     public void setScore(int score) {
         this.score = score;
+        
         if (score <= 0) {
-            //make the cat scream
+            AudioPlayer.play("/resource/cat_scream.wav");
         }
     }
 
-    /**
-     * @param score the score to set
-     */
     public void addScore(int score) {
-        this.score += score;
-        if (score <= 0) {
-            //make the cat scream
-        }
+        setScore(this.score + score);
+        if (score >= 0)
+        AudioPlayer.play("/resource/cat_meow.wav");
     }
 
     
@@ -82,8 +79,8 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_BROCCOLI,
                 ResourceTools.loadImageFromResource("resource/broccoli_pixel.png"), this));
 
-        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_CANDY,
-                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
+//        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_CANDY,
+//                ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_CANDY,
                 ResourceTools.loadImageFromResource("resource/pink_candy.gif"), this));
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_CANDY,
@@ -101,14 +98,16 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_ICECREAM,
                 ResourceTools.loadImageFromResource("resource/ice_cream.gif"), this));
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_TOASTER,
-                ResourceTools.loadImageFromResource("resource/toaster.tiff"), this));
-        toaster = ResourceTools.loadImageFromResource("resource/toaster.tiff");
+                ResourceTools.loadImageFromResource("resource/super_toaster.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_TOASTER,
+                ResourceTools.loadImageFromResource("resource/super_toaster.png"), this));
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_SUPERCANDY,
+                ResourceTools.loadImageFromResource("resource/super_candy.png"), this));
 
         setUpSound();
 
         soundManager.play(NYAN_SONG, -1);
         
-         toaster = ResourceTools.loadImageFromResource("resource/toaster.tiff");
     }
 
     //accept an int, returns a random number betwee zero and int
@@ -166,21 +165,33 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                     //do differents stuff for different items
                     if (item.getType().equals(Item.ITEM_TYPE_CANDY)) {
                         
-                        setScore(score + 10);
+                        addScore(10);
 
                     } else if (item.getType().equals(Item.ITEM_TYPE_ICECREAM)) {
                        AudioPlayer.play("/resource/cat_meow.wav");
 
-                        setScore(score + 50);
+                        addScore(50);
                     
                         
                     } else if (item.getType().equals(Item.ITEM_TYPE_BROCCOLI)) {
-                        AudioPlayer.play("/resource/cat_meow.wav");
+                        AudioPlayer.play("/resource/cat_scream.wav");
 
-                        setScore(score + -100);
-                   
+                        addScore(-100);
                     }
                  
+                    if (item.getType().equals(Item.ITEM_TYPE_TOASTER)){
+                        
+                        AudioPlayer.play("/resource/cat_scream.wav");
+                        
+                        addScore(-1000);
+                    }
+                    
+                      if (item.getType().equals(Item.ITEM_TYPE_SUPERCANDY)){
+                        
+                        AudioPlayer.play("/resource/cat_scream.wav");
+                        
+                        addScore(-1000);
+                    }
                 }
             }
         }
@@ -228,7 +239,9 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                 
               if (toaster != null){
                   graphics.drawImage(toaster, 10, 10, 100, 100, this);
+             
               }
+              
             }
 
         }
