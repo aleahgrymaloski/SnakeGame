@@ -55,7 +55,7 @@ public class Item {
     public static final String ITEM_TYPE_CANDY = "CANDY";
     public static final String ITEM_TYPE_ICECREAM = "ICECREAM";
     public static final String ITEM_TYPE_TOASTER = "TOASTER";
-    public static final String ITEM_TYPE_SUPERCANDY = "SUPERCANDY";
+    public static final String ITEM_TYPE_SUPERDONUT = "SUPERDONUT";
 
     private int x, y;
     private String type;
