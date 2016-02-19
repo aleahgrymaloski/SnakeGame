@@ -36,6 +36,15 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     private int score;
     Image toaster;
     private String trackNameGameTimer;
+    NyanAnimator animator;
+
+    private ArrayList<Item> getCopyOfItems() {
+        ArrayList<Item> copy = new ArrayList<>();
+        for (Item item : items) {
+            copy.add(item);
+        }
+        return copy;
+    }
 
     /**
      * @param score the score to set
@@ -45,23 +54,29 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 //
         if (score < 0) {
             AudioPlayer.play("/resource/broccoli_fail.wav");
+            animator.setAnimationImageNames(NyanAnimator.BKGND_GAME_OVER);
+//          
+//        BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("resource/G.png");
+//
+//        this.setBackground(temp.getScaledInstance(1000, 700, Image.SCALE_SMOOTH));  
+
         }
-        
+
     }
 
     public void addScore(int score) {
         setScore(this.score + score);
         if (score >= 0) {
-            
+
         }
     }
 
     public Sky() {
+        animator = new NyanAnimator();
         grid = new Grid(17, 16, 52, 36, new Point(10, 10), new Color(2, 49, 178, 1));
         cat = new NyanCat(Direction.LEFT, grid, this);
 
         BufferedImage temp = (BufferedImage) ResourceTools.loadImageFromResource("resource/nyan_cat_background.jpg");
-
         this.setBackground(temp.getScaledInstance(1000, 700, Image.SCALE_SMOOTH));
 
         items = new ArrayList<>();
@@ -98,7 +113,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                 ResourceTools.loadImageFromResource("resource/super_toaster.png"), this));
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_SUPERDONUT,
                 ResourceTools.loadImageFromResource("resource/super_donut.png"), this));
-           items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_TOASTER,
+        items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_TOASTER,
                 ResourceTools.loadImageFromResource("resource/super_toaster.png"), this));
 
         setUpSound();
@@ -149,12 +164,12 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                 moveDelay++;
             }
         }
-        
+
     }
 
     private void checkIntersections() {
         if (items != null) {
-            for (Item item : items) {
+            for (Item item : getCopyOfItems()) {
                 if (item.getLocation().equals(cat.getHead())) {
                     //move the item, no matter what type it is
                     item.setX(getRandom(grid.getColumns()));
@@ -200,11 +215,11 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                 if (item.getType().equals(Item.ITEM_TYPE_TOASTER)) {
                     item.setY(item.getY() + 1);
 
-                    if (item.getY() >= grid.getRows())  {
+                    if (item.getY() >= grid.getRows()) {
                         item.setY(0);
                     }
                 } else if (item.getType().equals(Item.ITEM_TYPE_SUPERDONUT)) {
-                    if (Math.random() < .15 ) {
+                    if (Math.random() < .15) {
                         item.setX(getRandom(grid.getColumns()));
                         item.setY(getRandom(grid.getRows()));
                     }
@@ -230,6 +245,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
         } else if (e.getKeyCode() == KeyEvent.VK_R) {
             setScore(0);
+            animator.setAnimationImageNames(NyanAnimator.BKGND_MAIN);
         }
     }
 
@@ -244,34 +260,38 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 
     @Override
     public void paintEnvironment(Graphics graphics) {
-        if (grid != null) {
-            grid.paintComponent(graphics);
-        }
-        if (cat != null) {
-            cat.draw(graphics);
+//        BufferedImage temp = (BufferedImage) animator.getCurrentImage();
+        graphics.drawImage(animator.getCurrentImage(), 0, 0, 1000, 700, this);
 
-            if (items != null) {
-                for (int i = 0; i < items.size(); i++) {
-                    items.get(i).draw(graphics);
-                }
+//        if (grid != null) {
+//            grid.paintComponent(graphics);
+//        }
+        if (score >= 0) {
+            if (cat != null) {
+                cat.draw(graphics);
 
-                if (toaster != null) {
-                    graphics.drawImage(toaster, 10, 10, 100, 100, this);
+                if (items != null) {
+                    for (int i = 0; i < items.size(); i++) {
+                        items.get(i).draw(graphics);
+                    }
+
+                    if (toaster != null) {
+                        graphics.drawImage(toaster, 10, 10, 100, 100, this);
+                    }
 
                 }
 
             }
 
-        }
-        graphics.setColor(Color.white);
-        graphics.setFont(new Font("Typewriter", Font.BOLD, 35));
-        graphics.drawString("Score: " + score, 10, 30);
+            graphics.setColor(Color.white);
+            graphics.setFont(new Font("Typewriter", Font.BOLD, 35));
+            graphics.drawString("Score: " + score, 10, 30);
 
-        if (score < 0) {
-            graphics.drawString("Game Over", 300, 300);
-            graphics.drawString("Press R to restart!", 300, 350);
+//        if (score < 0) {
+//            graphics.drawString("Game Over", 300, 300);
+//            graphics.drawString("Press R to restart!", 300, 350);
+//        }
         }
-
     }
 
     public void sky(Graphics graphics) {
