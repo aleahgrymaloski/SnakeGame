@@ -42,7 +42,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
      */
     public void setScore(int score) {
         this.score = score;
-
+//
         if (score <= 0) {
             AudioPlayer.play("/resource/cat_scream.wav");
         }
@@ -51,7 +51,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     public void addScore(int score) {
         setScore(this.score + score);
         if (score >= 0) {
-            AudioPlayer.play("/resource/cat_meow.wav");
+            
         }
     }
 
@@ -97,6 +97,8 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                 ResourceTools.loadImageFromResource("resource/super_toaster.png"), this));
         items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_SUPERDONUT,
                 ResourceTools.loadImageFromResource("resource/super_donut.png"), this));
+           items.add(new Item(getRandom(grid.getColumns()), getRandom(grid.getColumns()), Item.ITEM_TYPE_TOASTER,
+                ResourceTools.loadImageFromResource("resource/super_toaster.png"), this));
 
         setUpSound();
 
@@ -159,32 +161,32 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 
                     //do differents stuff for different items
                     if (item.getType().equals(Item.ITEM_TYPE_CANDY)) {
-
+                        AudioPlayer.play("/resource/Jump-SoundBible.com-1007297584.wav");
                         addScore(10);
 
                     } else if (item.getType().equals(Item.ITEM_TYPE_ICECREAM)) {
-                        AudioPlayer.play("/resource/cat_meow.wav");
+                        AudioPlayer.play("/resource/Jump-SoundBible.com-1007297584.wav");
 
                         addScore(50);
 
                     } else if (item.getType().equals(Item.ITEM_TYPE_BROCCOLI)) {
-                        AudioPlayer.play("/resource/cat_scream.wav");
+                        AudioPlayer.play("/resource/cat_meow.wav");
 
                         addScore(-100);
                     }
 
                     if (item.getType().equals(Item.ITEM_TYPE_TOASTER)) {
 
-                        AudioPlayer.play("/resource/cat_scream.wav");
+                        AudioPlayer.play("/resource/game_over_sound.wav");
 
                         addScore(-1000);
                     }
 
                     if (item.getType().equals(Item.ITEM_TYPE_SUPERDONUT)) {
 
-                        AudioPlayer.play("/resource/cat_meow.wav");
+                        AudioPlayer.play("/resource/super_donut_sound.wav");
 
-                        addScore(+1000);
+                        addScore(+500);
                     }
                 }
             }
@@ -201,7 +203,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                         item.setY(0);
                     }
                 } else if (item.getType().equals(Item.ITEM_TYPE_SUPERDONUT)) {
-                    if (Math.random() < .1) {
+                    if (Math.random() < .15 ) {
                         item.setX(getRandom(grid.getColumns()));
                         item.setY(getRandom(grid.getRows()));
                     }
@@ -225,7 +227,6 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
         } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
             cat.setDirection(Direction.DOWN);
         } else if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            AudioPlayer.play("/resource/cat_meow.wav");
         } else if (e.getKeyCode() == KeyEvent.VK_R) {
             setScore(0);
         }
