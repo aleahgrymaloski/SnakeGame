@@ -43,9 +43,10 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
     public void setScore(int score) {
         this.score = score;
 //
-        if (score <= 0) {
-            AudioPlayer.play("/resource/cat_scream.wav");
+        if (score < 0) {
+            AudioPlayer.play("/resource/broccoli_fail.wav");
         }
+        
     }
 
     public void addScore(int score) {
@@ -170,7 +171,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                         addScore(50);
 
                     } else if (item.getType().equals(Item.ITEM_TYPE_BROCCOLI)) {
-                        AudioPlayer.play("/resource/cat_meow.wav");
+                        AudioPlayer.play("/resource/broccoli_fail.wav");
 
                         addScore(-100);
                     }
@@ -184,7 +185,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 
                     if (item.getType().equals(Item.ITEM_TYPE_SUPERDONUT)) {
 
-                        AudioPlayer.play("/resource/super_donut_sound.wav");
+                        AudioPlayer.play("/resource/donut_winning_sound.wav");
 
                         addScore(+500);
                     }
@@ -199,7 +200,7 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
                 if (item.getType().equals(Item.ITEM_TYPE_TOASTER)) {
                     item.setY(item.getY() + 1);
 
-                    if (item.getY() >= grid.getRows()) {
+                    if (item.getY() >= grid.getRows())  {
                         item.setY(0);
                     }
                 } else if (item.getType().equals(Item.ITEM_TYPE_SUPERDONUT)) {
