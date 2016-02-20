@@ -263,6 +263,8 @@ class Sky extends Environment implements MoveValidatorIntf, CellDataProviderIntf
 //        BufferedImage temp = (BufferedImage) animator.getCurrentImage();
         graphics.drawImage(animator.getCurrentImage(), 0, 0, 1000, 700, this);
 
+
+
 //        if (grid != null) {
 //            grid.paintComponent(graphics);
 //        }

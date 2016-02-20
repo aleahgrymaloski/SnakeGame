@@ -6,7 +6,7 @@
 package snakegame;
 
 import images.Animator;
-import images.ImageManager;
+import images.ImageManager;  
 import images.ResourceTools;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -22,7 +22,10 @@ public class NyanAnimator {
     
     
     public static final String BKGND_MAIN_01 = "BKNGD_MAIN_01";
-//    public static final String BKGND_MAIN_01 = 'BKNGD_MAIN_01;
+    public static final String BKGND_MAIN_02 = "BKNGD_MAIN_02";
+    public static final String BKGND_MAIN_03 = "BKNGD_MAIN_03";
+    public static final String BKGND_MAIN_04 = "BKNGD_MAIN_04";
+
 
     public static final String BKGND_GAME_OVER_01 = "BKGND_GAME_OVER_01";
     public static final String BKGND_GAME_OVER_02 = "BKGND_GAME_OVER_02";
@@ -39,6 +42,9 @@ public class NyanAnimator {
     {
         BKGND_MAIN = new ArrayList<>();
         BKGND_MAIN.add(BKGND_MAIN_01);
+        BKGND_MAIN.add(BKGND_MAIN_02);
+        BKGND_MAIN.add(BKGND_MAIN_03);
+        BKGND_MAIN.add(BKGND_MAIN_04);
         
         BKGND_GAME_OVER = new ArrayList<>();
         BKGND_GAME_OVER.add(BKGND_GAME_OVER_01);
@@ -51,7 +57,11 @@ public class NyanAnimator {
         BKGND_GAME_OVER.add(BKGND_GAME_OVER_08);
         
         HashMap<String, Image> imageHM = new HashMap<>();
-        imageHM.put(BKGND_MAIN_01, ResourceTools.loadImageFromResource("resource/nyan_cat_background.jpg"));
+        imageHM.put(BKGND_MAIN_01, ResourceTools.loadImageFromResource("resource/background1.tiff"));
+        imageHM.put(BKGND_MAIN_01, ResourceTools.loadImageFromResource("resource/background2.tiff"));
+        imageHM.put(BKGND_MAIN_01, ResourceTools.loadImageFromResource("resource/background3.tiff"));
+        imageHM.put(BKGND_MAIN_01, ResourceTools.loadImageFromResource("resource/background4.tiff"));
+
 
         imageHM.put(BKGND_GAME_OVER_01, ResourceTools.loadImageFromResource("resource/G.png"));
         imageHM.put(BKGND_GAME_OVER_02, ResourceTools.loadImageFromResource("resource/GA.png"));
@@ -63,7 +73,7 @@ public class NyanAnimator {
         imageHM.put(BKGND_GAME_OVER_08, ResourceTools.loadImageFromResource("resource/GAME OVER.png"));
         
         ImageManager imageManager = new ImageManager(imageHM);
-        this.animator = new Animator(imageManager, BKGND_MAIN, 100);
+        this.animator = new Animator(imageManager, BKGND_MAIN, 150);
     }
 
     
